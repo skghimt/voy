@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IUserLoginDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        state,
+        createDate,
+        updateDate,
+        invalidDate,
+        userId,
+        token,
+        source
+    </sql>
+    <insert id="insert" parameterType="UserLogin">
+        INSERT INTO user_user_login (
+        id,
+        state,
+        createDate,
+        updateDate,
+        invalidDate,
+        userId,
+        token,
+        source
+        ) VALUES (
+        #{id},
+        #{state},
+        #{createDate},
+        #{updateDate,},
+        #{invalidDate},
+        #{userId},
+        #{token},
+        #{source}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="UserLogin">
+        UPDATE user_user_login
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state!=null">
+                state = #{state},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="invalidDate!=null">
+                invalidDate = #{invalidDate},
+            </if>
+            <if test="userId!=null">
+                userId = #{userId},
+            </if>
+            <if test="token!=null">
+                token = #{token},
+            </if>
+            <if test="source!=null">
+                source = #{source},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE user_user_login
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.state!=null">
+                state = #{map.state},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.invalidDate!=null">
+                invalidDate = #{map.invalidDate},
+            </if>
+            <if test="map.userId!=null">
+                userId = #{map.userId},
+            </if>
+            <if test="map.token!=null">
+                token = #{map.token},
+            </if>
+            <if test="map.source!=null">
+                source = #{map.source},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE user_user_login
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.state!=null">
+                state = #{update.state},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.invalidDate!=null">
+                invalidDate = #{update.invalidDate},
+            </if>
+            <if test="update.userId!=null">
+                userId = #{update.userId},
+            </if>
+            <if test="update.token!=null">
+                token = #{update.token},
+            </if>
+            <if test="update.source!=null">
+                source = #{update.source},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.invalidDate!=null">
+                AND invalidDate = #{condition.invalidDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.token!=null">
+                AND token = #{condition.token}
+            </if>
+            <if test="condition.source!=null">
+                AND source = #{condition.source}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO user_user_login (
+                id,
+                state,
+                createDate,
+                invalidDate,
+                userId,
+                token,
+                source
+        ) VALUES (
+                #{map.id},
+                #{map.state},
+                #{map.createDate},
+                #{map.invalidDate},
+                #{map.userId},
+                #{map.token},
+                #{map.source}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="UserLogin">
+        UPDATE user_user_login
+        <trim prefix="SET" suffixOverrides=",">
+            state = #{state},
+            createDate = #{createDate},
+            invalidDate = #{invalidDate},
+            userId = #{userId},
+            token = #{token},
+            source = #{source},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate = #{invalidDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="token!=null">
+                AND token = #{token}
+            </if>
+            <if test="source!=null">
+                AND source = #{source}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM user_user_login WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+    </select>
+
+    <select id="queryPage" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.state!=null">
+                ${condition.groupOp}   state  ${condition.state.op}  #{condition.state.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.invalidDate!=null">
+                ${condition.groupOp}   invalidDate  ${condition.invalidDate.op}  #{condition.invalidDate.data}
+            </if>
+            <if test="condition.userId!=null">
+                ${condition.groupOp}   userId  ${condition.userId.op}  #{condition.userId.data}
+            </if>
+            <if test="condition.token!=null">
+                ${condition.groupOp}   token  ${condition.token.op}  #{condition.token.data}
+            </if>
+            <if test="condition.source!=null">
+                ${condition.groupOp}   source  ${condition.source.op}  #{condition.source.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="state!=null">
+                AND state like CONCAT('%', #{state} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate like CONCAT('%', #{invalidDate} , '%')
+            </if>
+            <if test="userId!=null">
+                AND userId like CONCAT('%', #{userId} , '%')
+            </if>
+            <if test="token!=null">
+                AND token like CONCAT('%', #{token} , '%')
+            </if>
+            <if test="source!=null">
+                AND source like CONCAT('%', #{source} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.invalidDate!=null">
+                AND invalidDate = #{condition.invalidDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.token!=null">
+                AND token = #{condition.token}
+            </if>
+            <if test="condition.source!=null">
+                AND source = #{condition.source}
+            </if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="UserLogin">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_login
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate = #{invalidDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="token!=null">
+                AND token = #{token}
+            </if>
+            <if test="source!=null">
+                AND source = #{source}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM user_user_login
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="state!=null">
+               ${groupOp} state ${state.op}  #{state.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="invalidDate!=null">
+               ${groupOp} invalidDate ${invalidDate.op}  #{invalidDate.data}
+           </if>
+           <if test="userId!=null">
+               ${groupOp} userId ${userId.op}  #{userId.data}
+           </if>
+           <if test="token!=null">
+               ${groupOp} token ${token.op}  #{token.data}
+           </if>
+           <if test="source!=null">
+               ${groupOp} source ${source.op}  #{source.data}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM user_user_login
+    </select>
+
+</mapper>
+

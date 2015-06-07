@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IUserSkillDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        state,
+        createDate,
+        updateDate,
+        userId,
+        job,
+        language,
+        address,
+        car,
+        driverAge,
+        interest
+    </sql>
+    <insert id="insert" parameterType="UserSkill">
+        INSERT INTO user_user_skill (
+        id,
+        state,
+        createDate,
+        updateDate,
+        userId,
+        job,
+        language,
+        address,
+        car,
+        driverAge,
+        interest
+        ) VALUES (
+        #{id},
+        #{state},
+        #{createDate},
+        #{updateDate},
+        #{userId},
+        #{job},
+        #{language},
+        #{address},
+        #{car},
+        #{driverAge},
+        #{interest}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="UserSkill">
+        UPDATE user_user_skill
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state!=null">
+                state = #{state},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="updateDate!=null">
+                updateDate = #{updateDate},
+            </if>
+            <if test="userId!=null">
+                userId = #{userId},
+            </if>
+            <if test="job!=null">
+                job = #{job},
+            </if>
+            <if test="language!=null">
+                language = #{language},
+            </if>
+            <if test="address!=null">
+                address = #{address},
+            </if>
+            <if test="car!=null">
+                car = #{car},
+            </if>
+            <if test="driverAge!=null">
+                driverAge = #{driverAge},
+            </if>
+            <if test="interest!=null">
+                interest = #{interest},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE user_user_skill
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.state!=null">
+                state = #{map.state},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.updateDate!=null">
+                updateDate = #{map.updateDate},
+            </if>
+            <if test="map.job!=null">
+                job = #{map.job},
+            </if>
+            <if test="map.language!=null">
+                language = #{map.language},
+            </if>
+            <if test="map.address!=null">
+                address = #{map.address},
+            </if>
+            <if test="map.car!=null">
+                car = #{map.car},
+            </if>
+            <if test="map.driverAge!=null">
+                driverAge = #{map.driverAge},
+            </if>
+            <if test="map.interest!=null">
+                interest = #{map.interest},
+            </if>
+        </trim>
+        WHERE
+        userId = #{map.userId}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE user_user_skill
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.state!=null">
+                state = #{update.state},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.updateDate!=null">
+                updateDate = #{update.updateDate},
+            </if>
+            <if test="update.userId!=null">
+                userId = #{update.userId},
+            </if>
+            <if test="update.job!=null">
+                job = #{update.job},
+            </if>
+            <if test="update.language!=null">
+                language = #{update.language},
+            </if>
+            <if test="update.address!=null">
+                address = #{update.address},
+            </if>
+            <if test="update.car!=null">
+                car = #{update.car},
+            </if>
+            <if test="update.driverAge!=null">
+                driverAge = #{update.driverAge},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.job!=null">
+                AND job = #{condition.job}
+            </if>
+            <if test="condition.language!=null">
+                AND language = #{condition.language}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.car!=null">
+                AND car = #{condition.car}
+            </if>
+            <if test="condition.driverAge!=null">
+                AND driverAge = #{condition.driverAge}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO user_user_skill (
+                id,
+                state,
+                createDate,
+                updateDate,
+                userId,
+                job,
+                language,
+                address,
+                car,
+                driverAge
+        ) VALUES (
+                #{map.id},
+                #{map.state},
+                #{map.createDate},
+                #{map.updateDate},
+                #{map.userId},
+                #{map.job},
+                #{map.language},
+                #{map.address},
+                #{map.car},
+                #{map.driverAge}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="UserSkill">
+        UPDATE user_user_skill
+        <trim prefix="SET" suffixOverrides=",">
+            state = #{state},
+            createDate = #{createDate},
+            updateDate = #{updateDate},
+            userId = #{userId},
+            job = #{job},
+            language = #{language},
+            address = #{address},
+            car = #{car},
+            driverAge = #{driverAge},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="job!=null">
+                AND job = #{job}
+            </if>
+            <if test="language!=null">
+                AND language = #{language}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="car!=null">
+                AND car = #{car}
+            </if>
+            <if test="driverAge!=null">
+                AND driverAge = #{driverAge}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM user_user_skill WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+    </select>
+
+    <select id="queryPage" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.state!=null">
+                ${condition.groupOp}   state  ${condition.state.op}  #{condition.state.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.updateDate!=null">
+                ${condition.groupOp}   updateDate  ${condition.updateDate.op}  #{condition.updateDate.data}
+            </if>
+            <if test="condition.userId!=null">
+                ${condition.groupOp}   userId  ${condition.userId.op}  #{condition.userId.data}
+            </if>
+            <if test="condition.job!=null">
+                ${condition.groupOp}   job  ${condition.job.op}  #{condition.job.data}
+            </if>
+            <if test="condition.language!=null">
+                ${condition.groupOp}   language  ${condition.language.op}  #{condition.language.data}
+            </if>
+            <if test="condition.address!=null">
+                ${condition.groupOp}   address  ${condition.address.op}  #{condition.address.data}
+            </if>
+            <if test="condition.car!=null">
+                ${condition.groupOp}   car  ${condition.car.op}  #{condition.car.data}
+            </if>
+            <if test="condition.driverAge!=null">
+                ${condition.groupOp}   driverAge  ${condition.driverAge.op}  #{condition.driverAge.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="state!=null">
+                AND state like CONCAT('%', #{state} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate like CONCAT('%', #{updateDate} , '%')
+            </if>
+            <if test="userId!=null">
+                AND userId like CONCAT('%', #{userId} , '%')
+            </if>
+            <if test="job!=null">
+                AND job like CONCAT('%', #{job} , '%')
+            </if>
+            <if test="language!=null">
+                AND language like CONCAT('%', #{language} , '%')
+            </if>
+            <if test="address!=null">
+                AND address like CONCAT('%', #{address} , '%')
+            </if>
+            <if test="car!=null">
+                AND car like CONCAT('%', #{car} , '%')
+            </if>
+            <if test="driverAge!=null">
+                AND driverAge like CONCAT('%', #{driverAge} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.job!=null">
+                AND job = #{condition.job}
+            </if>
+            <if test="condition.language!=null">
+                AND language = #{condition.language}
+            </if>
+            <if test="condition.address!=null">
+                AND address = #{condition.address}
+            </if>
+            <if test="condition.car!=null">
+                AND car = #{condition.car}
+            </if>
+            <if test="condition.driverAge!=null">
+                AND driverAge = #{condition.driverAge}
+            </if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="UserSkill">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_skill
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="job!=null">
+                AND job = #{job}
+            </if>
+            <if test="language!=null">
+                AND language = #{language}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="car!=null">
+                AND car = #{car}
+            </if>
+            <if test="driverAge!=null">
+                AND driverAge = #{driverAge}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM user_user_skill
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="state!=null">
+               ${groupOp} state ${state.op}  #{state.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="updateDate!=null">
+               ${groupOp} updateDate ${updateDate.op}  #{updateDate.data}
+           </if>
+           <if test="userId!=null">
+               ${groupOp} userId ${userId.op}  #{userId.data}
+           </if>
+           <if test="job!=null">
+               ${groupOp} job ${job.op}  #{job.data}
+           </if>
+           <if test="language!=null">
+               ${groupOp} language ${language.op}  #{language.data}
+           </if>
+           <if test="address!=null">
+               ${groupOp} address ${address.op}  #{address.data}
+           </if>
+           <if test="car!=null">
+               ${groupOp} car ${car.op}  #{car.data}
+           </if>
+           <if test="driverAge!=null">
+               ${groupOp} driverAge ${driverAge.op}  #{driverAge.data}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM user_user_skill
+    </select>
+
+</mapper>
+

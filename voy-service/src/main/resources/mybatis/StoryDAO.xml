@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IStoryDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        state,
+        createDate,
+        updateDate,
+        storyId,
+        senderId,
+        coverUrl,
+        coverDes,
+        story,
+        checkStatus,
+        type
+    </sql>
+    <insert id="insert" parameterType="Story">
+        INSERT INTO message_story (
+        id,
+        state,
+        createDate,
+        updateDate,
+        storyId,
+        senderId,
+        coverUrl,
+        coverDes,
+        story,
+        checkStatus,
+        type
+        ) VALUES (
+        #{id},
+        #{state},
+        #{createDate},
+        #{updateDate},
+        #{storyId},
+        #{senderId},
+        #{coverUrl},
+        #{coverDes},
+        #{story},
+        #{checkStatus},
+        #{type}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="Story">
+        UPDATE message_story
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state!=null">
+                state = #{state},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="updateDate!=null">
+                updateDate = #{updateDate},
+            </if>
+            <if test="storyId!=null">
+                storyId = #{storyId},
+            </if>
+            <if test="senderId!=null">
+                senderId = #{senderId},
+            </if>
+            <if test="coverUrl!=null">
+                coverUrl = #{coverUrl},
+            </if>
+            <if test="coverDes!=null">
+                coverDes = #{coverDes},
+            </if>
+            <if test="story!=null">
+                story = #{story},
+            </if>
+            <if test="checkStatus!=null">
+                checkStatus = #{checkStatus},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE message_story
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.state!=null">
+                state = #{map.state},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.updateDate!=null">
+                updateDate = #{map.updateDate},
+            </if>
+            <if test="map.storyId!=null">
+                storyId = #{map.storyId},
+            </if>
+            <if test="map.senderId!=null">
+                senderId = #{map.senderId},
+            </if>
+            <if test="map.coverUrl!=null">
+                coverUrl = #{map.coverUrl},
+            </if>
+            <if test="map.coverDes!=null">
+                coverDes = #{map.coverDes},
+            </if>
+            <if test="map.story!=null">
+                story = #{map.story},
+            </if>
+            <if test="map.checkStatus!=null">
+                checkStatus = #{map.checkStatus},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE message_story
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.state!=null">
+                state = #{update.state},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.updateDate!=null">
+                updateDate = #{update.updateDate},
+            </if>
+            <if test="update.storyId!=null">
+                storyId = #{update.storyId},
+            </if>
+            <if test="update.senderId!=null">
+                senderId = #{update.senderId},
+            </if>
+            <if test="update.coverUrl!=null">
+                coverUrl = #{update.coverUrl},
+            </if>
+            <if test="update.coverDes!=null">
+                coverDes = #{update.coverDes},
+            </if>
+            <if test="update.story!=null">
+                story = #{update.story},
+            </if>
+            <if test="update.checkStatus!=null">
+                checkStatus = #{update.checkStatus},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.storyId!=null">
+                AND storyId = #{condition.storyId}
+            </if>
+            <if test="condition.senderId!=null">
+                AND senderId = #{condition.senderId}
+            </if>
+            <if test="condition.coverUrl!=null">
+                AND coverUrl = #{condition.coverUrl}
+            </if>
+            <if test="condition.coverDes!=null">
+                AND coverDes = #{condition.coverDes}
+            </if>
+            <if test="condition.story!=null">
+                AND story = #{condition.story}
+            </if>
+            <if test="condition.checkStatus!=null">
+                AND checkStatus = #{condition.checkStatus}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO message_story (
+                id,
+                state,
+                createDate,
+                updateDate,
+                storyId,
+                senderId,
+                coverUrl,
+                coverDes,
+                story,
+                checkStatus
+        ) VALUES (
+                #{map.id},
+                #{map.state},
+                #{map.createDate},
+                #{map.updateDate},
+                #{map.storyId},
+                #{map.senderId},
+                #{map.coverUrl},
+                #{map.coverDes},
+                #{map.story},
+                #{map.checkStatus}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="Story">
+        UPDATE message_story
+        <trim prefix="SET" suffixOverrides=",">
+            state = #{state},
+            createDate = #{createDate},
+            updateDate = #{updateDate},
+            storyId = #{storyId},
+            senderId = #{senderId},
+            coverUrl = #{coverUrl},
+            coverDes = #{coverDes},
+            story = #{story},
+            checkStatus = #{checkStatus},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="storyId!=null">
+                AND storyId = #{storyId}
+            </if>
+            <if test="senderId!=null">
+                AND senderId = #{senderId}
+            </if>
+            <if test="coverUrl!=null">
+                AND coverUrl = #{coverUrl}
+            </if>
+            <if test="coverDes!=null">
+                AND coverDes = #{coverDes}
+            </if>
+            <if test="story!=null">
+                AND story = #{story}
+            </if>
+            <if test="checkStatus!=null">
+                AND checkStatus = #{checkStatus}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM message_story WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+    </select>
+
+    <select id="queryPage" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.state!=null">
+                ${condition.groupOp}   state  ${condition.state.op}  #{condition.state.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.updateDate!=null">
+                ${condition.groupOp}   updateDate  ${condition.updateDate.op}  #{condition.updateDate.data}
+            </if>
+            <if test="condition.storyId!=null">
+                ${condition.groupOp}   storyId  ${condition.storyId.op}  #{condition.storyId.data}
+            </if>
+            <if test="condition.senderId!=null">
+                ${condition.groupOp}   senderId  ${condition.senderId.op}  #{condition.senderId.data}
+            </if>
+            <if test="condition.coverUrl!=null">
+                ${condition.groupOp}   coverUrl  ${condition.coverUrl.op}  #{condition.coverUrl.data}
+            </if>
+            <if test="condition.coverDes!=null">
+                ${condition.groupOp}   coverDes  ${condition.coverDes.op}  #{condition.coverDes.data}
+            </if>
+            <if test="condition.story!=null">
+                ${condition.groupOp}   story  ${condition.story.op}  #{condition.story.data}
+            </if>
+            <if test="condition.checkStatus!=null">
+                ${condition.groupOp}   checkStatus  ${condition.checkStatus.op}  #{condition.checkStatus.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="state!=null">
+                AND state like CONCAT('%', #{state} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate like CONCAT('%', #{updateDate} , '%')
+            </if>
+            <if test="storyId!=null">
+                AND storyId like CONCAT('%', #{storyId} , '%')
+            </if>
+            <if test="senderId!=null">
+                AND senderId like CONCAT('%', #{senderId} , '%')
+            </if>
+            <if test="coverUrl!=null">
+                AND coverUrl like CONCAT('%', #{coverUrl} , '%')
+            </if>
+            <if test="coverDes!=null">
+                AND coverDes like CONCAT('%', #{coverDes} , '%')
+            </if>
+            <if test="story!=null">
+                AND story like CONCAT('%', #{story} , '%')
+            </if>
+            <if test="checkStatus!=null">
+                AND checkStatus like CONCAT('%', #{checkStatus} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.storyId!=null">
+                AND storyId = #{condition.storyId}
+            </if>
+            <if test="condition.senderId!=null">
+                AND senderId = #{condition.senderId}
+            </if>
+            <if test="condition.coverUrl!=null">
+                AND coverUrl = #{condition.coverUrl}
+            </if>
+            <if test="condition.coverDes!=null">
+                AND coverDes = #{condition.coverDes}
+            </if>
+            <if test="condition.story!=null">
+                AND story = #{condition.story}
+            </if>
+            <if test="condition.checkStatus!=null">
+                AND checkStatus = #{condition.checkStatus}
+            </if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="storyId!=null">
+                AND storyId = #{storyId}
+            </if>
+            <if test="senderId!=null">
+                AND senderId = #{senderId}
+            </if>
+            <if test="coverUrl!=null">
+                AND coverUrl = #{coverUrl}
+            </if>
+            <if test="coverDes!=null">
+                AND coverDes = #{coverDes}
+            </if>
+            <if test="story!=null">
+                AND story = #{story}
+            </if>
+            <if test="checkStatus!=null">
+                AND checkStatus = #{checkStatus}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM message_story
+       <where>
+           <if test="id!=null">
+              and id =  #{id}
+           </if>
+           <if test="state!=null">
+               and state =  #{state}
+           </if>
+           <if test="createDate!=null">
+               and createDate =  #{createDate}
+           </if>
+           <if test="updateDate!=null">
+               and updateDate =  #{updateDate}
+           </if>
+           <if test="storyId!=null">
+               and storyId =  #{storyId}
+           </if>
+           <if test="senderId!=null">
+               and senderId =  #{senderId}
+           </if>
+           <if test="coverUrl!=null">
+               and coverUrl =  #{coverUrl}
+           </if>
+           <if test="coverDes!=null">
+               and coverDes =  #{coverDes}
+           </if>
+           <if test="story!=null">
+               and story =  #{story}
+           </if>
+           <if test="checkStatus!=null">
+               and checkStatus =  #{checkStatus}
+           </if>
+           <if test="type!=null">
+               and type =  #{type}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM message_story
+    </select>
+
+
+    <select id="userStory" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        WHERE senderId = #{userId} and type=#{type} and storyId &lt; #{storyId}
+        ORDER by createDate desc
+        limit #{size}
+    </select>
+
+    <select id="userHasStory" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM message_story
+        WHERE senderId = #{userId} and type=#{type} and storyId &lt; #{storyId}
+    </select>
+
+    <select id="storyPopuler" parameterType="java.util.Map" resultType="StoryPopuler">
+        SELECT senderId as userId, count(1) as num, max(createDate) as maxTime
+        FROM message_story
+        WHERE type = 0
+        group by senderId
+        order by num desc ,maxTime desc
+        limit #{index},#{size}
+    </select>
+
+
+    <select id="storyPopulerCount" resultType="java.lang.Integer">
+        select count(1)
+        from (
+            SELECT senderId
+            FROM message_story
+            WHERE type = 0
+            group by senderId
+        ) a
+    </select>
+
+    <select id="userStoryCount" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(1)
+        FROM message_story
+        WHERE senderId = #{userId} and type = 0
+    </select>
+
+    <select id="getStoryByReplyId" parameterType="java.util.Map" resultType="Story">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story
+        WHERE storyId = (
+        select storyId from message_story_comment where commentId = (
+        select commentId from message_story_reply where replyId = #{replyId}))
+    </select>
+
+</mapper>
+

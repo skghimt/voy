@@ -1,0 +1,42 @@
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.springframework:spring-test:$springVersion"
+
+    compile "org.mybatis:mybatis:$mybatisVerion"
+
+    compile "org.mybatis:mybatis-spring:1.2.2"
+    compile "com.alibaba:druid:1.0.11"
+
+    compile "org.springframework:spring-beans:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-aop:$springVersion"
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-jdbc:$springVersion"
+
+    compile "com.google.guava:guava:$guavaVersion"
+
+
+    compile "mysql:mysql-connector-java:$mysqlConnectorVersion"
+
+    compile "com.alibaba:dubbo:$dubboVersion"
+    compile "com.101tec:zkclient:$dubboZKClientVersion"
+
+    compile 'commons-codec:commons-codec:1.9'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+
+    compile 'org.apache.poi:poi:3.11-beta2'
+    compile 'org.apache.poi:poi-ooxml:3.11-beta2'
+    compile 'org.apache.poi:poi-ooxml-schemas:3.11-beta2'
+    compile 'org.apache.poi:poi-scratchpad:3.11-beta2'
+
+    compile 'org.aspectj:aspectjweaver:1.7.4'
+    compile 'org.aspectj:aspectjrt:1.7.4'
+
+
+    compile 'com.qiniu:sdk:6.1.2'
+    compile 'commons-fileupload:commons-fileupload:1.3.1'
+
+    compile project(':voy-domain')
+}

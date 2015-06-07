@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IUserInviteDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        createDate,
+        invalidDate,
+        userId,
+        email,
+        inviteId,
+        code
+    </sql>
+    <insert id="insert" parameterType="UserInvite">
+        INSERT INTO user_user_invite (
+        id,
+        createDate,
+        invalidDate,
+        userId,
+        email,
+        inviteId,
+        code
+        ) VALUES (
+        #{id},
+        #{createDate},
+        #{invalidDate},
+        #{userId},
+        #{email},
+        #{inviteId},
+        #{code}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="UserInvite">
+        UPDATE user_user_invite
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="invalidDate!=null">
+                invalidDate = #{invalidDate},
+            </if>
+            <if test="userId!=null">
+                userId = #{userId},
+            </if>
+            <if test="email!=null">
+                email = #{email},
+            </if>
+            <if test="inviteId!=null">
+                inviteId = #{inviteId},
+            </if>
+            <if test="code!=null">
+                code = #{code},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE user_user_invite
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.invalidDate!=null">
+                invalidDate = #{map.invalidDate},
+            </if>
+            <if test="map.userId!=null">
+                userId = #{map.userId},
+            </if>
+            <if test="map.email!=null">
+                email = #{map.email},
+            </if>
+            <if test="map.inviteId!=null">
+                inviteId = #{map.inviteId},
+            </if>
+            <if test="map.code!=null">
+                code = #{map.code},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE user_user_invite
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.invalidDate!=null">
+                invalidDate = #{update.invalidDate},
+            </if>
+            <if test="update.userId!=null">
+                userId = #{update.userId},
+            </if>
+            <if test="update.email!=null">
+                email = #{update.email},
+            </if>
+            <if test="update.inviteId!=null">
+                inviteId = #{update.inviteId},
+            </if>
+            <if test="update.code!=null">
+                code = #{update.code},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.invalidDate!=null">
+                AND invalidDate = #{condition.invalidDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.email!=null">
+                AND email = #{condition.email}
+            </if>
+            <if test="condition.inviteId!=null">
+                AND inviteId = #{condition.inviteId}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO user_user_invite (
+                id,
+                createDate,
+                invalidDate,
+                userId,
+                email,
+                inviteId,
+                code
+        ) VALUES (
+                #{map.id},
+                #{map.createDate},
+                #{map.invalidDate},
+                #{map.userId},
+                #{map.email},
+                #{map.inviteId},
+                #{map.code}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="UserInvite">
+        UPDATE user_user_invite
+        <trim prefix="SET" suffixOverrides=",">
+            createDate = #{createDate},
+            invalidDate = #{invalidDate},
+            userId = #{userId},
+            email = #{email},
+            inviteId = #{inviteId},
+            code = #{code},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate = #{invalidDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="email!=null">
+                AND email = #{email}
+            </if>
+            <if test="inviteId!=null">
+                AND inviteId = #{inviteId}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM user_user_invite WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+    </select>
+
+    <select id="queryPage" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.invalidDate!=null">
+                ${condition.groupOp}   invalidDate  ${condition.invalidDate.op}  #{condition.invalidDate.data}
+            </if>
+            <if test="condition.userId!=null">
+                ${condition.groupOp}   userId  ${condition.userId.op}  #{condition.userId.data}
+            </if>
+            <if test="condition.email!=null">
+                ${condition.groupOp}   email  ${condition.email.op}  #{condition.email.data}
+            </if>
+            <if test="condition.inviteId!=null">
+                ${condition.groupOp}   inviteId  ${condition.inviteId.op}  #{condition.inviteId.data}
+            </if>
+            <if test="condition.code!=null">
+                ${condition.groupOp}   code  ${condition.code.op}  #{condition.code.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate like CONCAT('%', #{invalidDate} , '%')
+            </if>
+            <if test="userId!=null">
+                AND userId like CONCAT('%', #{userId} , '%')
+            </if>
+            <if test="email!=null">
+                AND email like CONCAT('%', #{email} , '%')
+            </if>
+            <if test="inviteId!=null">
+                AND inviteId like CONCAT('%', #{inviteId} , '%')
+            </if>
+            <if test="code!=null">
+                AND code like CONCAT('%', #{code} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.invalidDate!=null">
+                AND invalidDate = #{condition.invalidDate}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.email!=null">
+                AND email = #{condition.email}
+            </if>
+            <if test="condition.inviteId!=null">
+                AND inviteId = #{condition.inviteId}
+            </if>
+            <if test="condition.code!=null">
+                AND code = #{condition.code}
+            </if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="invalidDate!=null">
+                AND invalidDate = #{invalidDate}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="email!=null">
+                AND email = #{email}
+            </if>
+            <if test="inviteId!=null">
+                AND inviteId = #{inviteId}
+            </if>
+            <if test="code!=null">
+                AND code = #{code}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM user_user_invite
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="invalidDate!=null">
+               ${groupOp} invalidDate ${invalidDate.op}  #{invalidDate.data}
+           </if>
+           <if test="userId!=null">
+               ${groupOp} userId ${userId.op}  #{userId.data}
+           </if>
+           <if test="email!=null">
+               ${groupOp} email ${email.op}  #{email.data}
+           </if>
+           <if test="inviteId!=null">
+               ${groupOp} inviteId ${inviteId.op}  #{inviteId.data}
+           </if>
+           <if test="code!=null">
+               ${groupOp} code ${code.op}  #{code.data}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM user_user_invite
+    </select>
+
+
+    <select id="queryPageByTime" parameterType="java.util.Map" resultType="UserInvite">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_user_invite
+        WHERE userId = #{userId} and createDate &lt; #{time}
+        LIMIT #{size}
+    </select>
+
+</mapper>
+

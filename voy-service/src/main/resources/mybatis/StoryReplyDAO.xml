@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IStoryReplyDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        state,
+        createDate,
+        updateDate,
+        commentId,
+        replyId,
+        userId,
+        content
+    </sql>
+    <insert id="insert" parameterType="StoryReply">
+        INSERT INTO message_story_reply (
+        state,
+        createDate,
+        updateDate,
+        commentId,
+        replyId,
+        userId,
+        content
+        ) VALUES (
+        #{state},
+        #{createDate},
+        #{updateDate},
+        #{commentId},
+        #{replyId},
+        #{userId},
+        #{content}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="StoryReply">
+        UPDATE message_story_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state!=null">
+                state = #{state},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="updateDate!=null">
+                updateDate = #{updateDate},
+            </if>
+            <if test="commentId!=null">
+                commentId = #{commentId},
+            </if>
+            <if test="replyId!=null">
+                replyId = #{replyId},
+            </if>
+            <if test="userId!=null">
+                userId = #{userId},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE message_story_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.state!=null">
+                state = #{map.state},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.updateDate!=null">
+                updateDate = #{map.updateDate},
+            </if>
+            <if test="map.commentId!=null">
+                commentId = #{map.commentId},
+            </if>
+            <if test="map.replyId!=null">
+                replyId = #{map.replyId},
+            </if>
+            <if test="map.userId!=null">
+                userId = #{map.userId},
+            </if>
+            <if test="map.content!=null">
+                content = #{map.content},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE message_story_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.state!=null">
+                state = #{update.state},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.updateDate!=null">
+                updateDate = #{update.updateDate},
+            </if>
+            <if test="update.commentId!=null">
+                commentId = #{update.commentId},
+            </if>
+            <if test="update.replyId!=null">
+                replyId = #{update.replyId},
+            </if>
+            <if test="update.userId!=null">
+                userId = #{update.userId},
+            </if>
+            <if test="update.content!=null">
+                content = #{update.content},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.commentId!=null">
+                AND commentId = #{condition.commentId}
+            </if>
+            <if test="condition.replyId!=null">
+                AND replyId = #{condition.replyId}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO message_story_reply (
+                state,
+                createDate,
+                updateDate,
+                commentId,
+                replyId,
+                userId,
+                content
+        ) VALUES (
+                    #{map.state},
+                    #{map.createDate},
+                    #{map.updateDate},
+                    #{map.commentId},
+                    #{map.replyId},
+                    #{map.userId},
+                    #{map.content}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="StoryReply">
+        UPDATE message_story_reply
+        <trim prefix="SET" suffixOverrides=",">
+            state = #{state},
+            createDate = #{createDate},
+            updateDate = #{updateDate},
+            commentId = #{commentId},
+            replyId = #{replyId},
+            userId = #{userId},
+            content = #{content},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="commentId!=null">
+                AND commentId = #{commentId}
+            </if>
+            <if test="replyId!=null">
+                AND replyId = #{replyId}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="content!=null">
+                AND content = #{content}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM message_story_reply WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+    </select>
+
+    <select id="queryPage" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.state!=null">
+                ${condition.groupOp}   state  ${condition.state.op}  #{condition.state.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.updateDate!=null">
+                ${condition.groupOp}   updateDate  ${condition.updateDate.op}  #{condition.updateDate.data}
+            </if>
+            <if test="condition.commentId!=null">
+                ${condition.groupOp}   commentId  ${condition.commentId.op}  #{condition.commentId.data}
+            </if>
+            <if test="condition.replyId!=null">
+                ${condition.groupOp}   replyId  ${condition.replyId.op}  #{condition.replyId.data}
+            </if>
+            <if test="condition.userId!=null">
+                ${condition.groupOp}   userId  ${condition.userId.op}  #{condition.userId.data}
+            </if>
+            <if test="condition.content!=null">
+                ${condition.groupOp}   content  ${condition.content.op}  #{condition.content.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="state!=null">
+                AND state like CONCAT('%', #{state} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate like CONCAT('%', #{updateDate} , '%')
+            </if>
+            <if test="commentId!=null">
+                AND commentId like CONCAT('%', #{commentId} , '%')
+            </if>
+            <if test="replyId!=null">
+                AND replyId like CONCAT('%', #{replyId} , '%')
+            </if>
+            <if test="userId!=null">
+                AND userId like CONCAT('%', #{userId} , '%')
+            </if>
+            <if test="content!=null">
+                AND content like CONCAT('%', #{content} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.commentId!=null">
+                AND commentId = #{condition.commentId}
+            </if>
+            <if test="condition.replyId!=null">
+                AND replyId = #{condition.replyId}
+            </if>
+            <if test="condition.userId!=null">
+                AND userId = #{condition.userId}
+            </if>
+            <if test="condition.content!=null">
+                AND content = #{condition.content}
+            </if>
+        </trim>
+        <if test="orderBy!=null">
+        ORDER BY ${orderBy} ${sortBy}
+        </if>
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="StoryReply">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_story_reply
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="commentId!=null">
+                AND commentId = #{commentId}
+            </if>
+            <if test="replyId!=null">
+                AND replyId = #{replyId}
+            </if>
+            <if test="userId!=null">
+                AND userId = #{userId}
+            </if>
+            <if test="content!=null">
+                AND content = #{content}
+            </if>
+        </trim>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM message_story_reply
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="state!=null">
+               ${groupOp} state ${state.op}  #{state.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="updateDate!=null">
+               ${groupOp} updateDate ${updateDate.op}  #{updateDate.data}
+           </if>
+           <if test="commentId!=null">
+               ${groupOp} commentId ${commentId.op}  #{commentId.data}
+           </if>
+           <if test="replyId!=null">
+               ${groupOp} replyId ${replyId.op}  #{replyId.data}
+           </if>
+           <if test="userId!=null">
+               ${groupOp} userId ${userId.op}  #{userId.data}
+           </if>
+           <if test="content!=null">
+               ${groupOp} content ${content.op}  #{content.data}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM message_story_reply
+    </select>
+
+    <select id="reviewCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(1)
+        from message_story_comment commt left join message_story story on commt.storyId = story.storyId
+        where commt.isRead = 0 and story.senderId = #{userId}
+    </select>
+</mapper>
+

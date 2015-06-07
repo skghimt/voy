@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="cn.wondervoy.dao.wondervoy.IdFactoryDao">
+
+    <select id="getIndexByBusinessCode" resultType="_long" parameterType="_int">
+        select businessIndex from base_id_builder where businessCode = #{businessCode}
+    </select>
+
+    <update id="updateIdBuildByBusinessCodeAndIndex"  parameterType="map">
+        update base_id_builder set businessIndex = #{newEnd} where businessCode = #{businessCode} and businessIndex = #{newStart}
+    </update>
+
+    <select id="isExistBusinessCode" parameterType="_int" resultType="_int">
+        select count(id) from base_id_builder where businessCode = #{businessCode}
+    </select>
+
+    <insert id="createNewBusinessCodeIdProduce" parameterType="map">
+        insert into base_id_builder (businessCode,businessIndex) value (#{businessCode},#{defaultEndIndex})
+    </insert>
+
+</mapper>

@@ -1,0 +1,12 @@
+
+
+include 'voy-domain'
+
+include 'voy-api'
+
+include 'voy-service'
+
+include 'voy-admin-war'
+
+include 'voy-web-war'
+

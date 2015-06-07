@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wondervoy.dao.wondervoy.IChatRelationDAO">
+<!--
+insert
+update
+updateNull
+deleteById
+deleteByCondition
+deleteByProperty
+fetch
+findOne
+findList
+findAll
+queryPage
+like
+queryList
+queryOne
+count
+selectMaxId
+updateOrSave
+selectOne
+selectList
+-->
+    <sql id="Base_Column_List">
+        id,
+        state,
+        createDate,
+        updateDate,
+        relationId,
+        userAId,
+        userBId
+    </sql>
+    <insert id="insert" parameterType="ChatRelation">
+        INSERT INTO message_chat_relation (
+        id,
+        state,
+        createDate,
+        updateDate,
+        relationId,
+        userAId,
+        userBId
+        ) VALUES (
+        #{id},
+        #{state},
+        #{createDate},
+        #{updateDate},
+        #{relationId},
+        #{userAId},
+        #{userBId}
+        )
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+        SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="ChatRelation">
+        UPDATE message_chat_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="state!=null">
+                state = #{state},
+            </if>
+            <if test="createDate!=null">
+                createDate = #{createDate},
+            </if>
+            <if test="updateDate!=null">
+                updateDate = #{updateDate},
+            </if>
+            <if test="relationId!=null">
+                relationId = #{relationId},
+            </if>
+            <if test="userAId!=null">
+                userAId = #{userAId},
+            </if>
+            <if test="userBId!=null">
+                userBId = #{userBId},
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
+
+    <update id="updateMap">
+        UPDATE message_chat_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.state!=null">
+                state = #{map.state},
+            </if>
+            <if test="map.createDate!=null">
+                createDate = #{map.createDate},
+            </if>
+            <if test="map.updateDate!=null">
+                updateDate = #{map.updateDate},
+            </if>
+            <if test="map.relationId!=null">
+                relationId = #{map.relationId},
+            </if>
+            <if test="map.userAId!=null">
+                userAId = #{map.userAId},
+            </if>
+            <if test="map.userBId!=null">
+                userBId = #{map.userBId},
+            </if>
+        </trim>
+        WHERE
+        id = #{map.id}
+    </update>
+
+    <update id="updateByCondition">
+        UPDATE message_chat_relation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="update.state!=null">
+                state = #{update.state},
+            </if>
+            <if test="update.createDate!=null">
+                createDate = #{update.createDate},
+            </if>
+            <if test="update.updateDate!=null">
+                updateDate = #{update.updateDate},
+            </if>
+            <if test="update.relationId!=null">
+                relationId = #{update.relationId},
+            </if>
+            <if test="update.userAId!=null">
+                userAId = #{update.userAId},
+            </if>
+            <if test="update.userBId!=null">
+                userBId = #{update.userBId},
+            </if>
+        </trim>
+
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.relationId!=null">
+                AND relationId = #{condition.relationId}
+            </if>
+            <if test="condition.userAId!=null">
+                AND userAId = #{condition.userAId}
+            </if>
+            <if test="condition.userBId!=null">
+                AND userBId = #{condition.userBId}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="insertMap" >
+        INSERT INTO message_chat_relation (
+                id,
+                state,
+                createDate,
+                updateDate,
+                relationId,
+                userAId,
+                userBId
+        ) VALUES (
+                #{map.id},
+                #{map.state},
+                #{map.createDate},
+                #{map.updateDate},
+                #{map.relationId},
+                #{map.userAId},
+                #{map.userBId}
+        )
+    </insert>
+
+
+    <update id="updateNull" parameterType="ChatRelation">
+        UPDATE message_chat_relation
+        <trim prefix="SET" suffixOverrides=",">
+            state = #{state},
+            createDate = #{createDate},
+            updateDate = #{updateDate},
+            relationId = #{relationId},
+            userAId = #{userAId},
+            userBId = #{userBId},
+        </trim>
+        WHERE
+        id = #{id} 
+    </update>
+
+    <!-- 按Id删除 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM message_chat_relation
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </delete>
+
+
+    <delete id="deleteByCondition" parameterType="java.util.Map">
+        DELETE FROM message_chat_relation
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="relationId!=null">
+                AND relationId = #{relationId}
+            </if>
+            <if test="userAId!=null">
+                AND userAId = #{userAId}
+            </if>
+            <if test="userBId!=null">
+                AND userBId = #{userBId}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByProperty" parameterType="java.util.Map">
+        DELETE FROM message_chat_relation WHERE
+        ${property} = #{value}
+    </delete>
+
+    <select id="fetch" parameterType="java.lang.Long" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            AND id = #{id}
+        </trim>
+    </select>
+
+    <select id="findOne" parameterType="java.util.Map" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation WHERE
+        ${property} = #{value}
+        LIMIT 0,1
+    </select>
+
+    <select id="findList" parameterType="java.util.Map" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation WHERE
+        ${property} = #{value}
+    </select>
+
+    <select id="findAll" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+    </select>
+
+    <select id="queryPage" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+        <where>
+
+            <if test="condition.whereSql != null">
+                and id in (#{condition.whereSql})
+            </if>
+
+            <if test="condition.id!=null">
+                ${condition.groupOp}   id  ${condition.id.op}  #{condition.id.data}
+            </if>
+            <if test="condition.state!=null">
+                ${condition.groupOp}   state  ${condition.state.op}  #{condition.state.data}
+            </if>
+            <if test="condition.createDate!=null">
+                ${condition.groupOp}   createDate  ${condition.createDate.op}  #{condition.createDate.data}
+            </if>
+            <if test="condition.updateDate!=null">
+                ${condition.groupOp}   updateDate  ${condition.updateDate.op}  #{condition.updateDate.data}
+            </if>
+            <if test="condition.relationId!=null">
+                ${condition.groupOp}   relationId  ${condition.relationId.op}  #{condition.relationId.data}
+            </if>
+            <if test="condition.userAId!=null">
+                ${condition.groupOp}   userAId  ${condition.userAId.op}  #{condition.userAId.data}
+            </if>
+            <if test="condition.userBId!=null">
+                ${condition.groupOp}   userBId  ${condition.userBId.op}  #{condition.userBId.data}
+            </if>
+
+
+    </where>
+
+        <if test="offset != null">
+            limit ${offset}, ${rows}
+        </if>
+    </select>
+
+    <select id="like" parameterType="java.util.Map" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="id!=null">
+                AND id like CONCAT('%', #{id} , '%')
+            </if>
+            <if test="state!=null">
+                AND state like CONCAT('%', #{state} , '%')
+            </if>
+            <if test="createDate!=null">
+                AND createDate like CONCAT('%', #{createDate} , '%')
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate like CONCAT('%', #{updateDate} , '%')
+            </if>
+            <if test="relationId!=null">
+                AND relationId like CONCAT('%', #{relationId} , '%')
+            </if>
+            <if test="userAId!=null">
+                AND userAId like CONCAT('%', #{userAId} , '%')
+            </if>
+            <if test="userBId!=null">
+                AND userBId like CONCAT('%', #{userBId} , '%')
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.Map" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="condition.id!=null">
+                AND id = #{condition.id}
+            </if>
+            <if test="condition.state!=null">
+                AND state = #{condition.state}
+            </if>
+            <if test="condition.createDate!=null">
+                AND createDate = #{condition.createDate}
+            </if>
+            <if test="condition.updateDate!=null">
+                AND updateDate = #{condition.updateDate}
+            </if>
+            <if test="condition.relationId!=null">
+                AND relationId = #{condition.relationId}
+            </if>
+            <if test="condition.userAId!=null">
+                AND userAId = #{condition.userAId}
+            </if>
+            <if test="condition.userBId!=null">
+                AND userBId = #{condition.userBId}
+            </if>
+        </trim>
+        ORDER BY ${orderBy} ${sortBy}
+    </select>
+
+    <select id="queryOne" parameterType="java.util.Map" resultType="ChatRelation">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM message_chat_relation
+        WHERE 1= 1
+            <if test="id!=null">
+                AND id = #{id}
+            </if>
+            <if test="state!=null">
+                AND state = #{state}
+            </if>
+            <if test="createDate!=null">
+                AND createDate = #{createDate}
+            </if>
+            <if test="updateDate!=null">
+                AND updateDate = #{updateDate}
+            </if>
+            <if test="relationId!=null">
+                AND relationId = #{relationId}
+            </if>
+            <if test="userAId!=null">
+                AND userAId = #{userAId}
+            </if>
+            <if test="userBId!=null">
+                AND userBId = #{userBId}
+            </if>
+        limit 0,1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(id) FROM message_chat_relation
+       <where>
+           <if test="id!=null">
+               ${groupOp} id ${id.op}  #{id.data}
+           </if>
+           <if test="state!=null">
+               ${groupOp} state ${state.op}  #{state.data}
+           </if>
+           <if test="createDate!=null">
+               ${groupOp} createDate ${createDate.op}  #{createDate.data}
+           </if>
+           <if test="updateDate!=null">
+               ${groupOp} updateDate ${updateDate.op}  #{updateDate.data}
+           </if>
+           <if test="relationId!=null">
+               ${groupOp} relationId ${relationId.op}  #{relationId.data}
+           </if>
+           <if test="userAId!=null">
+               ${groupOp} userAId ${userAId.op}  #{userAId.data}
+           </if>
+           <if test="userBId!=null">
+               ${groupOp} userBId ${userBId.op}  #{userBId.data}
+           </if>
+
+       </where>
+
+    </select>
+
+    <select id="selectMaxId" resultType="java.lang.Long">
+        SELECT
+        MAX(id)
+        FROM message_chat_relation
+    </select>
+
+</mapper>
+
